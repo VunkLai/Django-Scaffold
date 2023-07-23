@@ -28,6 +28,12 @@ class ProjectRole(models.TextChoices):
 
 
 class Member(models.Model):
+    class Meta:
+        unique_together = [
+            ["project", "user"],
+        ]
+
+    # fixme: The relationship is failure on Member, Project and User
     project = models.ForeignKey(
         Project,
         on_delete=models.CASCADE,
