@@ -1,1 +1,1 @@
-# Objectives Tracking
+# Django Scaffold

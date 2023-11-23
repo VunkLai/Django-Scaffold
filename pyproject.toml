@@ -48,6 +48,9 @@ django-settings-module = "server.settings"
 ignore = [
   "db.sqlite3",
 ]
+ignore-patterns = [
+  'migrations/'
+]
 
 [tool.pylint.messages_control]
 disable = [
@@ -55,6 +58,7 @@ disable = [
   "missing-class-docstring",
   "missing-function-docstring",
   "too-few-public-methods",
+  "no-member",
   "fixme",
 ]
 
@@ -73,6 +77,9 @@ exclude = [
 [tool.pytest.ini_options]
 DJANGO_SETTINGS_MODULE = "server.settings"
 python_files = ['tests.py', 'test_*.py']
+
+[tool.bandit]
+skips = ["B101"]
 
 [tool.commitizen]
 name = "cz_conventional_commits"
