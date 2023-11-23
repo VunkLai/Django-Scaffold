@@ -15,7 +15,7 @@ lint:
 	poetry run mypy server/
 
 test:
-	poetry run pytest server/
+	poetry run pytest --cov=server server/
 
 security:
 	poetry run bandit -r server/ -c pyproject.toml
