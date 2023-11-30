@@ -59,7 +59,7 @@ INSTALLED_APPS = [
     "corsheaders",
     "rest_framework",
     # Application
-    "user",
+    "authentication",
 ]
 
 MIDDLEWARE = [
@@ -104,7 +104,7 @@ DATABASES = {
     }
 }
 
-AUTH_USER_MODEL = "user.User"
+AUTH_USER_MODEL = "authentication.User"
 
 
 # Password validation
