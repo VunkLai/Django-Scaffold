@@ -14,7 +14,9 @@ class Manager(UserManager):
         user.save()  # user.save(using=self._db)
         return user
 
-    def create_superuser(self, email: str, password: str, **extra_fields: dict) -> User:
+    def create_superuser(
+        self, email: str, password: str | None, **extra_fields: dict
+    ) -> User:
         extra_fields.setdefault("is_staff", True)
         extra_fields.setdefault("is_superuser", True)
 
@@ -25,7 +27,9 @@ class Manager(UserManager):
 
         return self._create_user(email, password, **extra_fields)
 
-    def create_user(self, email: str, password: str, **extra_fields: dict) -> User:
+    def create_user(
+        self, email: str, password: str | None, **extra_fields: dict
+    ) -> User:
         extra_fields.setdefault("is_staff", False)
         extra_fields.setdefault("is_superuser", False)
         return self._create_user(email, password, **extra_fields)
@@ -63,3 +67,7 @@ class User(AbstractBaseUser, Permission):
     USERNAME_FIELD = "email"
     EMAIL_FIELD = "email"
     REQUIRED_FIELDS = ["organization"]
+
+    @property
+    def is_admin(self) -> bool:
+        return self.role == User.Role.ADMIN

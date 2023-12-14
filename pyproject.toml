@@ -12,6 +12,7 @@ django = "^4.2.7"
 django-environ = "^0.11.2"
 djangorestframework = "^3.14.0"
 django-cors-headers = "^4.3.1"
+drf-yasg = "^1.21.7"
 # Other package
 
 [tool.poetry.group.dev.dependencies]
@@ -37,7 +38,7 @@ commitizen = "^3.12.0"
 
 [tool.isort]
 profile = "black"
-known_django = "django,rest_framework"
+known_django = "django,rest_framework,drf_yasg"
 sections = "FUTURE,STDLIB,DJANGO,THIRDPARTY,FIRSTPARTY,LOCALFOLDER"
 skip = "migrations"
 
@@ -62,6 +63,7 @@ disable = [
   "no-member",
   "fixme",
   "arguments-differ",
+  "invalid-str-returned",
 ]
 
 [tool.pylint.basic]

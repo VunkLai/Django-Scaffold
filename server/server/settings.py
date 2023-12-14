@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     # Plugin
     "corsheaders",
     "rest_framework",
+    "drf_yasg",
     # Application
     "authentication",
     "resources",
@@ -148,3 +149,13 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+# Rest Framework
+# https://www.django-rest-framework.org/
+
+REST_FRAMEWORK = {
+    "DEFAULT_RENDERER_CLASSES": [
+        "rest_framework.renderers.JSONRenderer",
+    ]
+}
