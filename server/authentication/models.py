@@ -39,6 +39,13 @@ class Permission(PermissionsMixin):
     is_active = models.BooleanField(default=True)
 
 
+class Organization(models.Model):
+    name = models.CharField(max_length=255)
+
+    def __str__(self) -> str:
+        return self.name
+
+
 class User(AbstractBaseUser, Permission):
     class Role(models.TextChoices):
         ADMIN = "admin", _("Administrator")
@@ -49,8 +56,10 @@ class User(AbstractBaseUser, Permission):
     last_login = models.DateTimeField(blank=True, null=True)
 
     role = models.CharField(max_length=5, choices=Role.choices, default=Role.USER)
+    organization = models.ForeignKey("Organization", on_delete=models.CASCADE)
 
     objects = Manager()
 
     USERNAME_FIELD = "email"
     EMAIL_FIELD = "email"
+    REQUIRED_FIELDS = ["organization"]
