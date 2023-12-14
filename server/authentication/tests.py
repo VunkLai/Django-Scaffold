@@ -27,13 +27,15 @@ def test_create_superuser(django_user_model):
     assert user.is_superuser
     assert user.is_staff
     assert user.is_active
+    assert user.role == User.Role.USER
 
 
 @pytest.mark.django_db
 def test_crate_user(django_user_model):
-    django_user_model.objects.create_user(**USER)
+    django_user_model.objects.create_user(**USER, role=User.Role.ADMIN)
 
     user = authenticate(**USER)
     assert not user.is_superuser
     assert not user.is_staff
     assert user.is_active
+    assert user.role == User.Role.ADMIN
