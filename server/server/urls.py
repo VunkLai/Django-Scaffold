@@ -37,6 +37,7 @@ SchemaView = get_schema_view(
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("auth/", include("authentication.urls")),
+    path("member/", include("member.urls")),
     path("resources/", include("resources.urls")),
     # Swagger
     path("swagger<format>/", SchemaView.without_ui(cache_timeout=0)),

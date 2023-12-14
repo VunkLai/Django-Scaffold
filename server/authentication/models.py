@@ -35,7 +35,7 @@ class Manager(UserManager):
         return self._create_user(email, password, **extra_fields)
 
 
-class Permission(PermissionsMixin):
+class UserMixin(PermissionsMixin):
     is_superuser = models.BooleanField(default=False)
 
     is_staff = models.BooleanField(default=False)
@@ -43,14 +43,7 @@ class Permission(PermissionsMixin):
     is_active = models.BooleanField(default=True)
 
 
-class Organization(models.Model):
-    name = models.CharField(max_length=255)
-
-    def __str__(self) -> str:
-        return self.name
-
-
-class User(AbstractBaseUser, Permission):
+class User(AbstractBaseUser, UserMixin):
     class Role(models.TextChoices):
         ADMIN = "admin", _("Administrator")
         USER = "user", _("User")
@@ -60,7 +53,13 @@ class User(AbstractBaseUser, Permission):
     last_login = models.DateTimeField(blank=True, null=True)
 
     role = models.CharField(max_length=5, choices=Role.choices, default=Role.USER)
-    organization = models.ForeignKey("Organization", on_delete=models.CASCADE)
+
+    organization = models.ForeignKey(
+        "member.Organization",
+        on_delete=models.CASCADE,
+        related_name="users",
+        related_query_name="user",
+    )
 
     objects = Manager()
 

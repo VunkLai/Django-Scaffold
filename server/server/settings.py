@@ -61,6 +61,7 @@ INSTALLED_APPS = [
     "drf_yasg",
     # Application
     "authentication",
+    "member",
     "resources",
 ]
 

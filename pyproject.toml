@@ -64,6 +64,7 @@ disable = [
   "fixme",
   "arguments-differ",
   "invalid-str-returned",
+  "too-many-ancestors",
 ]
 
 [tool.pylint.basic]
